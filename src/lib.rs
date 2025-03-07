@@ -1,3 +1,5 @@
+#![doc = include_str!("../README.md")]
+
 use proc_macro::TokenStream;
 use quote::{ToTokens, quote};
 use syn::{
@@ -63,6 +65,7 @@ impl ToTokens for FormatPart {
     }
 }
 
+/// Macro to replace placeholders in a string with values at compile time.
 #[proc_macro]
 pub fn exact_format(input: TokenStream) -> TokenStream {
     let ExactFormat {
