@@ -110,3 +110,11 @@ fn test_positional_search() {
     let result = exact_format!("Hello World", "o" => "X");
     assert_eq!(result, "HellX WXrld");
 }
+
+#[test]
+fn test_multiline_string() {
+    let result = exact_format!(r#"Hello
+World"#, "World" => "Earth");
+    assert_eq!(result, "Hello\nEarth");
+}
+
