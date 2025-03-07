@@ -32,12 +32,12 @@ exact_format!("const user = { id: USERID, name: 'USERNAME' };",
              "USERNAME" => user_name);
 ```
 
-Expands to something like:
+Expands to:
 
 ```rust,ignore
 {
-    let __value_0 = user_id.to_string();
-    let __value_1 = user_name;
+    let __value0__ = user_id.to_string();
+    let __value1__ = user_name;
     format!("{}{}{}{}{}",
             "const user = { id: ",
             __value0__,
