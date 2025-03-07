@@ -9,6 +9,11 @@ license = "Apache-2.0"
 proc-macro = true
 
 [dependencies]
-syn = { version = "2" }
+syn = { version = "2", default-features = false, features = [
+    "parsing",
+    "derive",
+    "printing",
+    "proc-macro",
+] }
 proc-macro2 = "1"
 quote = "1"

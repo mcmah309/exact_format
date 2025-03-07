@@ -26,15 +26,15 @@ assert_eq!(result, "const user = { id: 42, name: 'John' };");
 
 The macro expands to a `format!` call that handles the replacements. For example:
 
-```rust
+```rust,ignore
 exact_format!("const user = { id: USERID, name: 'USERNAME' };",
              "USERID" => user_id.to_string(),
-             "USERNAME" => user_name)
+             "USERNAME" => user_name);
 ```
 
 Expands to something like:
 
-```rust
+```rust,ignore
 {
     let __value_0 = user_id.to_string();
     let __value_1 = user_name;
