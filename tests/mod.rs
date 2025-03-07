@@ -1,5 +1,3 @@
-// In tests/test_exact_format.rs
-
 use exact_format::exact_format;
 
 #[test]
@@ -17,8 +15,8 @@ fn test_no_replacements() {
 #[test]
 fn test_multiple_replacements() {
     let result = exact_format!("Hello {first} {last}",
-                              "{first}" => "John",
-                              "{last}" => "Doe");
+                                "{first}" => "John",
+                                "{last}" => "Doe");
     assert_eq!(result, "Hello John Doe");
 }
 
@@ -32,24 +30,21 @@ fn test_multiple_occurrences() {
 fn test_nested_replacements() {
     // First replace table, then id
     let result = exact_format!("SELECT * FROM TABLE WHERE id = ID",
-                               "TABLE" => "users",
-                               "ID" => "42");
+                                "TABLE" => "users",
+                                "ID" => "42");
     assert_eq!(result, "SELECT * FROM users WHERE id = 42");
 }
 
 #[test]
 fn test_overlapping_keys() {
-    // The key "Hello" contains "He", test that replacement order matters
     let result = exact_format!("Hello World",
-                              "He" => "Hi",
-                              "Hello" => "Greetings");
-    // We find "He" first, so replace that
+                                "He" => "Hi",
+                                "Hello" => "Greetings");
     assert_eq!(result, "Hillo World");
 
-    // Opposite order: explicitly look for longer matches first
     let result = exact_format!("Hello World",
-                              "Hello" => "Greetings",
-                              "He" => "Hi");
+                                "Hello" => "Greetings",
+                                "He" => "Hi");
     assert_eq!(result, "Greetings World");
 }
 
@@ -68,7 +63,6 @@ fn test_expression_as_value() {
 
 #[test]
 fn test_escape_curly_braces() {
-    // The original string has literal curly braces
     let result = exact_format!("Function call: function({param})", "{param}" => "value");
     assert_eq!(result, "Function call: function(value)");
 }
@@ -78,22 +72,23 @@ fn test_javascript_style_interpolation() {
     let user_id = 42;
     let user_name = "John";
     let result = exact_format!("const user = { id: USERID, name: 'USERNAME' };",
-                               "USERID" => user_id.to_string(),
-                               "USERNAME" => user_name);
+                                "USERID" => user_id,
+                                "USERNAME" => user_name);
     assert_eq!(result, "const user = { id: 42, name: 'John' };");
+}
 
-    // This test verifies that the expanded code is equivalent to:
-    // format!("{}{}{}{}{}",
-    //         "const user = { id: ",
-    //         user_id.to_string(),
-    //         ", name: '",
-    //         user_name,
-    //         "' };")
+#[test]
+fn test_javascript_style_duplicate_interpolation() {
+    let user_id = 42;
+    let user_name = "John";
+    let result = exact_format!("const user = { id: USERID, name: 'USERNAME', magic: USERID };",
+                                "USERID" => user_id,
+                                "USERNAME" => user_name);
+    assert_eq!(result, "const user = { id: 42, name: 'John', magic: 42 };");
 }
 
 #[test]
 fn test_replacement_order() {
-    // Ensure we find the leftmost match first
     let result = exact_format!("abc abc", "a" => "X", "b" => "Y");
     assert_eq!(result, "XYc XYc");
 }
@@ -112,7 +107,6 @@ fn test_character_by_character() {
 
 #[test]
 fn test_positional_search() {
-    // This test verifies that we scan from left to right for each replacement
     let result = exact_format!("Hello World", "o" => "X");
     assert_eq!(result, "HellX WXrld");
 }
