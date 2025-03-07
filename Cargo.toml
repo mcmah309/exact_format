@@ -1,9 +1,10 @@
 [package]
 name = "exact_format"
-description = "Exact format macro."
-version = "0.1.0"
+description = "A procedural macro for compile time string replacement without using the standard format placeholder syntax (`{}`). This is most useful when dealing with strings that contain `{ }` blocks you do no wish to interpolate e.g. writing javascript."
+version = "0.2.0"
 edition = "2024"
 license = "Apache-2.0"
+repository = "https://github.com/mcmah309/exact_format"
 
 [lib]
 proc-macro = true

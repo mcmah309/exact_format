@@ -1,6 +1,6 @@
 # exact_format
 
-A procedural macro for compile time exact string replacement in Rust, without using the standard format placeholder syntax (`{}`). This is most useful when dealing with strings that contain `{ }` blocks you do no wish to interpolate e.g. writing javascript.
+A procedural macro for compile time string replacement without using the standard format placeholder syntax (`{}`). This is most useful when dealing with strings that contain `{ }` blocks you do no wish to interpolate e.g. writing javascript.
 
 ## Usage
 
