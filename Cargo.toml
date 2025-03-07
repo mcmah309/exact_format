@@ -1,0 +1,14 @@
+[package]
+name = "exact_format"
+description = "Exact format macro."
+version = "0.1.0"
+edition = "2024"
+license = "Apache-2.0"
+
+[lib]
+proc-macro = true
+
+[dependencies]
+syn = { version = "2" }
+proc-macro2 = "1"
+quote = "1"
